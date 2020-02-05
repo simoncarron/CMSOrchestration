@@ -10,7 +10,6 @@ import app.module.mod_cms as cms
 
 import config as setting
 
-
 def create_app():
     a = cms.Acano(setting.CMS_IP_ADDRESS + ":" + setting.CMS_PORT, setting.CMS_USERNAME, setting.CMS_PASSWORD)
 
