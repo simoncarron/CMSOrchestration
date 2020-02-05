@@ -1,0 +1,119 @@
+{% extends "home/layout.html" %}
+
+{% block container %}
+
+{% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+<div class="alert alert-success" role="alert">
+    <button type= "button" class= "close" data-dismiss= "alert" > &times; </button>
+            {{ message }}
+</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+
+<div class="container text-center">
+    <h1 class="mt-5 text-white font-weight-light">List of Spaces</h1>
+    <p class="lead text-white-50">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Consequat semper viverra nam libero justo laoreet sit amet. Varius duis at consectetur lorem donec. Integer quis auctor elit sed vulputate. Scelerisque varius morbi enim nunc faucibus a. </p>
+</div>
+
+{% if coSpaces %}
+
+    {% for coSpace in coSpaces %}
+
+
+<div class="jumbotron">
+    <h1 class="display-4">{{ coSpace.name }}</h1>
+    <p class="lead">Bellow, manage your space.</p>
+    <hr class="my-4">
+    <p></p>
+
+    <!-- Button trigger Guest PIN modal -->
+    <button class="btn btn-primary" data-target="#GuestPIN{{ loop.index }}" data-toggle="modal" type="button">
+        Guest PIN
+    </button>
+
+        {% for accessMethode in coSpace.accessMethodes %}
+
+    <!-- Button trigger Host PIN modal -->
+    <button class="btn btn-primary" data-target="#HostPIN{{ loop.index }}" data-toggle="modal" type="button">
+        Host PIN
+    </button>
+
+        {% endfor %}
+
+
+</div>
+
+<!-- Guest PIN Modal -->
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="GuestPIN{{ loop.index }}" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Guest PIN</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url_for('home.space') }}" method="post">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">PIN</label>
+                        <input id="custId" name="coSpaceID" type="hidden" value="{{ coSpace.id }}">
+                        <input id="type" name="type" type="hidden" value="guestPIN">
+                        <input class="form-control" id="GuestPIN" name="passcode" placeholder="Example input placeholder" type="text" value="{{ coSpace.passcode }}">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Change</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        {% for accessMethode in coSpace.accessMethodes %}
+
+<!-- Host PIN Modal -->
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="HostPIN{{ loop.index }}" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Host PIN</h5>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url_for('home.space') }}" method="post">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">PIN</label>
+                        <input id="custId" name="coSpaceID" type="hidden" value="{{ coSpace.id }}">
+                        <input id="custId" name="accessMethodeID" type="hidden" value="{{ accessMethode['id'] }}">
+                        <input id="type" name="type" type="hidden" value="hostPIN">
+                        <input class="form-control" id="HostPIN" name="passcode" placeholder="Example input placeholder" type="text" value="{{ accessMethode['passcode'] }}">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Change</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        {% endfor %}
+
+    {% endfor %}
+
+{% endif %}
+
+
+{% endblock %}

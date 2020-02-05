@@ -1,0 +1,21 @@
+{% extends "home/layout.html" %}
+
+{% block container %}
+
+<script>
+function myFunction() {
+  var x = document.getElementById("PINInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
+
+<div class="container text-center">
+  <h1 class="mt-5 text-white font-weight-light">Meeting Organisation</h1>
+  <p class="lead text-white-50">Adui vivamus arcu felis bibendum ut tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim sit amet.</p>
+</div>
+
+{% endblock %}

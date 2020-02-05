@@ -1,0 +1,30 @@
+{% macro head(title) %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Simon Carron">
+    <title>CMS Orchestration</title>
+
+    <!-- Custom styles for this template -->
+
+    <link href="{{url_for('static', filename='css/home.css')}}" rel="stylesheet">
+
+    <link href="{{url_for('static', filename='css/dashboard.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+
+    <script src="{{url_for('static', filename='vendor/jquery/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
+
+<script>
+
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+</script>
+
+
+{% endmacro %}

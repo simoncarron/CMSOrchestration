@@ -1,0 +1,25 @@
+{% from "auth/macro/header.html" import head with context %}
+{% from "auth/macro/navigator.html" import navigator with context %}
+{% from "auth/macro/footer.html" import footer with context %}
+
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+<head>
+
+    {{ head(location) }}
+
+</head>
+<body class="d-flex flex-column h-100">
+
+{% block navigator %}
+{{ navigator() }}
+{% endblock %}
+
+        {% block action %}{% endblock %}
+        {% block alert %}{% endblock %}
+        {% block container %}{% endblock %}
+
+{{ footer() }}
+
+</body>
+</html>
